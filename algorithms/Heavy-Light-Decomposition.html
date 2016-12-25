@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>树链剖分</title>
+		<style>
+			p{margin:0px}
+		</style>
+		<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+		<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+	</head>
+	<body>
+		<div align="center">
+			<div style="width:800px;margin-top:20px;font-size:24px" align="left">
+				树链剖分
+			</div>
+			<div style="width:800px;margin:0px;font-size:12px;color:#707070" align="left">
+				解决树上路径信息查询、路径信息更改问题的算法。
+			</div>
+			<div style="width:800px;margin:20px;text-indent:2em" align="left">
+				<p>
+					树链剖分是使用特定的方法，将一棵树分解为若干个链，这些链互不重叠且包含树上的所有结点。如果方法得当，可以在 $O(\mathrm{log}\,n)$ 的时间内将树内任意一条简单路径分解为 $O(\mathrm{log}\,n)$ 个子路径，对于每个子路径分别使用线段树进行操作。因为线段树操作复杂度为 $O(\mathrm{log}\,n)$ ，所以树链剖分单次操作复杂度为 $O(\mathrm{log}^2\,n)$ 。那么，现在的问题就是如何对树进行分解。
+				</p>
+				<p>
+					首先，我们以任意结点为根对树进行一遍深搜，树的形态由此确定。定义每个节点的 $size$ 值为以该结点为根的子树的结点数。现在，我们要根据 $size$ 值对树上的所有边进行分类。边一共有两种：重边和轻边。由一个结点指向它的孩子中 $size$ 最大的那个的边就是重边，若有多个 $size$ 最大的，任取一个。其余的边均为轻边。定义全部由重边组成的链为重链，从非叶结点出发的重边。根据定义，每个非叶结点的子边中都有且只有一条重边。且若一个结点 $u$ 的父边为轻边，有 $u.size&lt;u.parent.size\,/\,2$ 。由此，我们可知任意一个结点到根节点的路径上轻边的个数为 $O(\mathrm{log}\,n)$ ，又因为该路径上轻边与重链交替出现（轻边可连续出现多次），所以在该路径上重链的数量也为 $O(\mathrm{log}\,n)$ 。
+				</p>
+				<div style="margin:20px" align="center">
+					<img>
+						<svg width="360" height="260">
+							<line x1="130" y1="30" x2="330" y2="230" stroke="black" stroke-width="2"/>
+							<line x1="130" y1="30" x2="80" y2="80" stroke="lightgrey" stroke-width="4"/>
+							<line x1="80" y1="80" x2="30" y2="130" stroke="black" stroke-width="2"/>
+							<line x1="180" y1="80" x2="130" y2="130" stroke="lightgrey" stroke-width="4"/>
+							<line x1="130" y1="130" x2="80" y2="180" stroke="black" stroke-width="2"/>
+							<line x1="130" y1="130" x2="180" y2="180" stroke="lightgrey" stroke-width="4"/>
+							<line x1="" y1="" x2="" y2="" stroke="black" stroke-width=""/>
+							<circle cx="130" cy="30" r="15" stroke="black" stroke-width="2" fill="white"/>
+							<text x="130" y="37" text-anchor="middle">1</text>
+							<circle cx="80" cy="80" r="15" stroke="black" stroke-width="2" fill="white"/>
+							<text x="80" y="87" text-anchor="middle">2</text>
+							<circle cx="30" cy="130" r="15" stroke="black" stroke-width="2" fill="white"/>
+							<text x="30" y="137" text-anchor="middle">3</text>
+							<circle cx="180" cy="80" r="15" stroke="black" stroke-width="2" fill="white"/>
+							<text x="180" y="87" text-anchor="middle">4</text>
+							<circle cx="130" cy="130" r="15" stroke="black" stroke-width="2" fill="white"/>
+							<text x="130" y="137" text-anchor="middle">5</text>
+							<circle cx="80" cy="180" r="15" stroke="black" stroke-width="2" fill="white"/>
+							<text x="80" y="187" text-anchor="middle">6</text>
+							<circle cx="180" cy="180" r="15" stroke="black" stroke-width="2" fill="white"/>
+							<text x="180" y="187" text-anchor="middle">7</text>
+							<circle cx="230" cy="130" r="15" stroke="black" stroke-width="2" fill="white"/>
+							<text x="230" y="137" text-anchor="middle">8</text>
+							<circle cx="280" cy="180" r="15" stroke="black" stroke-width="2" fill="white"/>
+							<text x="280" y="187" text-anchor="middle">9</text>
+							<circle cx="330" cy="230" r="15" stroke="black" stroke-width="2" fill="white"/>
+							<text x="330" y="237" text-anchor="middle">10</text>
+						</svg>
+					</img>
+				</div>
+				<p>
+					注意： $7$ 号结点自己也是一条重链。在图中，轻边用灰色表示，重边用黑色表示。我们可以看到，按照上述方法划分轻重边可以使重链包含所有的点，也就可以包含所有点上的信息，我们如果将整棵树重新标号，使得每条重链上的点为连续的标号就可以用线段树维护了。具体地，我们再次深搜，每次优先通过自己的重边向下扩展，再扩展轻边，记录DFS序，得到的DFS序就是新的标号了。在深搜过程中，我们记录一个映射 $map$ ，满足 $map_{u.dfn}=u$ ，以便构建线段树时使用。
+				</p>
+				<p>
+					我们现在总结树链剖分的具体做法：进行两次深搜，第一次记录基本信息（如父结点、重孩子、 $size$ 等），第二次确定DFS序、映射 $map$ 、 $top$ 数组（记录从当前结点沿着重链向上走能达到的深度最小的结点）。对于新的编号建立线段树。查询两个结点的距离：每次在两个结点中选择一个，若它的父边为重边，则将其变为它的 $top$ ，否则变为它的 $parent$ ；要求选择的那一个必须是更改之后深度较深的一个，也就是说，将两个结点均按上述方式变换，变换后哪一个深度较深就实际更改哪一个，另一个保持不变；重复此过程直到两个结点处于同一条重链上，最后将较深的那一个变为较浅的那一个即得到了两个结点的最近公共祖先；在变换的同时记录每次变换路径上的边权和（因为每次要么走的是重链（编号连续），要么走轻边（虽然编号不连续但是只有一条边），所以前者可用线段树进行区间查找，后者可以直接记录父边边权）。修改的方式也很简单，只要像查询一样每次在线段树上进行修改而不是查询就可以了，这样，只要是线段树可以维护的信息就都可以在树链剖分中实现。其实，树链剖分不仅可以使用线段树，其它数据结构也可以使用，单次操作的复杂度为 $O(\mathrm{log}\,n \times f(n))$ ，其中 $f(n)$ 为使用的数据结构的复杂度。
+				</p>
+				<p>
+					本文为作者原创，由于能力所限，文中若出现错误、纰漏及表述不清的地方，请联系作者<a href="mailto:xiaoyushuo0419@live.com">Dev-XYS</a>。
+				</p>
+			</div>
+			<div style="width:800px;margin:20px" align="left">
+				<p>参考文献：</p>
+				<p>[1]&emsp;<a href="http://www.cnblogs.com/BLADEVIL/p/3479713.html?utm_source=tuicool&utm_medium=referral">树链剖分轻重链讲解 - BLADEVIL</a></p>
+				<p>[2]&emsp;<a href="https://github.com/24OI/Standard_Code_Library/blob/master/c%2B%2B/Graph/HLD/ZJOI2008_count.cpp">GitHub : 24OI/Standard_Code_Library/.../ZJOI2008_count.cpp by SCaffrey</a></p>
+			</div>
+			<div style="width:800px;margin:20px" align="left">
+				<p>资源：</p>
+				<p><a href="https://github.com/Dev-XYS/Algorithms/blob/master/Heavy-Light-Decomposition.cpp">Heavy-Light-Decomposition.cpp</a>&emsp;by <span style="color:grey">Dev-XYS</span></p>
+			</div>
+		</div>
+	</body>
+</html>
