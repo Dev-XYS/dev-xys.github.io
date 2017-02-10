@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>逆元的预处理</title>
+		<style>
+			p{margin:0px}
+		</style>
+		<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+		<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+	</head>
+	<body>
+		<div align="center">
+			<div style="width:800px;margin-top:20px;font-size:24px" align="left">
+				逆元的预处理
+			</div>
+			<div style="width:800px;margin:0px;font-size:12px;color:#707070" align="left">
+				线性时间内预处理出 $n$ 以内的所有逆元及阶乘的逆元。
+			</div>
+			<div style="width:800px;margin:0px;font-size:12px;color:#109030" align="left">
+				本文尚未完成，请读者留意内容的完整性。
+			</div>
+			<div style="width:800px;margin:20px;text-indent:2em" align="left">
+				<p>
+					如果一个题目需要大量使用逆元，换言之，使用逆元的次数达到了 $\Omega (n)$ 的级别，我们就需要先将一定范围内的所有逆元全部预处理出来，从而实现 $O(1)$ 调用。大家不妨先看看这道题目：<a href="http://codevs.cn/problem/1304/">CodeVS - 1304 拓扑序计数</a>。
+				</p>
+				<p>
+					我们先介绍预处理 $1$ 到 $n$ 的所有逆元的方法。要实现线性求解，要利用递推式，如果我们能 $O(1)$ 利用一个已经求得的逆元来递推出当前待求的逆元，就可以实现总体时间的线性。那么，下面的主要任务就是找到一个递推式来求解逆元。假设我们现在希望求出 $i$ 的逆元。下列推导过程中 $p$ 为模数，我们规定 $p$ 必须为大于 $n$ 的质数。 $[1,i-1]$ 的逆元已经求出，用 $inv[x]$ 表示。
+				</p>
+				<p style="margin-top:20px">
+					将 $p$ 表示为带余除法的形式（除以 $i$ ） $$p=ki+r$$ 将其转化为模 $p$ 意义下的式子，得到 $$ki+r\equiv 0\pmod{p}$$ 两边同乘 $i^{-1}r^{-1}$ 得到 $$kr^{-1}+i^{-1}\equiv 0\pmod{p}$$ 移项，得到 $$i^{-1}\equiv -kr^{-1}\pmod{p}$$ 这里 $k=\lfloor\frac{p}{i}\rfloor$ ， $r=p\bmod i$ ，所以可以转化为 $$i^{-1}\equiv -\lfloor\frac{p}{i}\rfloor\cdot inv[p\bmod i]\pmod{p}$$ 因为 $p\bmod i< i$ ，所以 $inv[p \bmod i]$ 可以直接使用。至此，递推式求解完毕，我们已经实现了线性时间内预处理逆元。
+				</p>
+				<p>
+					预处理阶乘逆元的方法可以参见下方资源中的链接网页所给出的代码，其推导过程较简单，读者可自行尝试探究。
+				</p>
+				<p>
+					本文为作者原创，由于能力所限，文中若出现错误、纰漏及表述不清的地方，请联系作者<a href="mailto:xiaoyushuo0419@live.com">Dev-XYS</a>。
+				</p>
+			</div>
+			<div style="width:800px;margin:20px" align="left">
+				<p>参考文献：</p>
+				<p>[1]&emsp;<a href="http://blog.miskcoo.com/2014/09/linear-find-all-invert">[数论]线性求所有逆元的方法</a></p>
+				<p>[2]&emsp;<a href="http://wenku.baidu.com/link?url=ImagoC3DE1p0D55S7qbzXrSaQ4wbaY93gB3kEmPiHx_CnnNsrdkz1vYA93uTBtvmDlwWgfDBDUK_DRQ9AkC0_zHlO6bADth4c-ZqUFHF03q">同余定义和性质</a></p>
+				<p>[3]&emsp;<a href="http://blog.sina.com.cn/s/blog_78a6df1d0101630x.html">[转载]Texlive: latex数学符号表(2)</a></p>
+			</div>
+			<div style="width:800px;margin:20px" align="left">
+				<p>资源：</p>
+				<p>[1]&emsp;<a href="https://github.com/Dev-XYS/Algorithms/blob/master/Modular-Multiplicative-Inverse-Sieve(Linear).cpp">Modular-Multiplicative-Inverse-Sieve(Linear).cpp</a>&emsp;by <span style="color:grey">Dev-XYS</span></p>
+				<p>[2]&emsp;<a href="https://github.com/Dev-XYS/OI-Problems/blob/master/codevs/1304.cpp">CodeVS - 1304 拓扑序计数 代码</a>&emsp;by <span style="color:grey">Dev-XYS</span></p>
+			</div>
+		</div>
+	</body>
+</html>
