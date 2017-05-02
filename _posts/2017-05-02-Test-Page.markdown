@@ -1,0 +1,20 @@
+---
+layout: post
+title:  "测试页面"
+date:   2017-05-02 20:26:19 +0800
+categories: Test Page
+---
+
+这是一个测试页面。
+
+<span style="color:#0000FF">显示不同颜色的文字。</span>
+
+<span style="font-family:华文楷体;font-size:20pt">显示不同字体与大小的文字。（本行文字使用华文楷体）</span>
+
+代码测试：
+{% highlight C++ %}
+int main()
+{
+	return 0;
+}
+{% endhighlight %}

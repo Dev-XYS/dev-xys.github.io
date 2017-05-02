@@ -1,14 +1,21 @@
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Welcome to Dev-XYS's Home Page</title>
-	</head>
-	<body>
-		<p align="center">
-			<a href="blog/Blog-Home.html">博客主页</a>
-		</p>
-		<p align="center">
-			<a href="algorithms/index.html">算法博客</a>
-		</p>
-	</body>
-</html>
+---
+layout: default
+---
+
+<div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+
+</div>
