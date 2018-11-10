@@ -2,7 +2,7 @@
 layout: post
 title:  "测试页面"
 date:   2017-05-02 20:26:19 +0800
-categories: Test Page
+categories: Test
 ---
 
 这是一个测试页面。
