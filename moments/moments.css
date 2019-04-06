@@ -1,0 +1,16 @@
+.moments-main-div {
+	margin: 0 auto;
+	width: 600px;
+}
+
+.moments-div {
+	margin-block-start: 0px;
+	margin-bottom: 8px;
+	margin-top: 8px;
+}
+
+.moments-head {
+	color: gray;
+	margin-bottom: 8px;
+	margin-top: 30px;
+}
