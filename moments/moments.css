@@ -1,6 +1,18 @@
-.moments-main-div {
-	margin: 0 auto;
-	width: 600px;
+body {
+	font-size: 1rem;
+}
+
+@media (max-width: 12cm) {
+	.moments-main-div {
+		margin: 25px auto;
+	}
+}
+
+@media (min-width: 12cm) {
+	.moments-main-div {
+		margin: 0 auto;
+		width: 600px;
+	}
 }
 
 .moments-div {
