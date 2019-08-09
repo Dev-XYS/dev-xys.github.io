@@ -15,6 +15,11 @@ body {
 	}
 }
 
+p {
+	margin-bottom: 8px;
+	margin-top: 8px;
+}
+
 .moments-div {
 	margin-block-start: 0px;
 	margin-bottom: 8px;
@@ -23,6 +28,15 @@ body {
 
 .moments-head {
 	color: gray;
+	margin-bottom: 16px;
+	margin-top: 32px;
+}
+
+.comment-area {
+	color: gray;
+	font-size: 0.75rem;
+}
+
+[id ^= "comment-panel-"] {
 	margin-bottom: 8px;
-	margin-top: 30px;
 }
