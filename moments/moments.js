@@ -18,13 +18,15 @@ function displayOne(id) {
 	let div = document.getElementById("main-div");
 	div.innerHTML += xhr.responseText;
 	div.innerHTML += "<div class=\"comment-area\" id=\"comment-area-"+ id + "\"><div id=\"comment-panel-" + id + "\"><a href=\"javascript:startComment(" + id + ")\">评论</a>&emsp;</div></div>";
-	xhr.open("GET", "https://wcsys.000webhostapp.com/get.php?id=" + id, false);
+	xhr.open("GET", "https://wcsys.000webhostapp.com/get.php?id=" + id);
+	xhr.onload = function() {
+		let cdiv = document.createElement("div");
+		cdiv.id = "comment-body-" + id;
+		cdiv.innerText = xhr.responseText;
+		let area = document.getElementById("comment-area-" + id);
+		area.appendChild(cdiv);
+	};
 	xhr.send();
-	let cdiv = document.createElement("div");
-	cdiv.id = "comment-body-" + id;
-	cdiv.innerText = xhr.responseText;
-	let area = document.getElementById("comment-area-" + id);
-	area.appendChild(cdiv);
 }
 
 function startComment(id) {
