@@ -25,6 +25,11 @@ function displayOne(id) {
 		cdiv.innerText = xhr.responseText;
 		let area = document.getElementById("comment-area-" + id);
 		area.appendChild(cdiv);
+		let script = document.getElementById(id + "-script");
+		if (script) {
+			console.log(script.innerText);
+			eval(script.innerText);
+		}
 	};
 	xhr.send();
 }
