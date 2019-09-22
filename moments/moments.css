@@ -24,12 +24,14 @@ p {
 	margin-block-start: 0px;
 	margin-bottom: 8px;
 	margin-top: 8px;
+	text-indent: 2rem;
 }
 
 .moments-head {
 	color: gray;
 	margin-bottom: 16px;
 	margin-top: 32px;
+	text-indent: 0rem;
 }
 
 .comment-area {
