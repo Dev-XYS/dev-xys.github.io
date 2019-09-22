@@ -24,13 +24,28 @@ function LuckyBall(id) {
 		return x * x * 80 + 10;
 	}
 	let globalTime = 0;
+	let playing = false;
 	function animate() {
-		requestAnimationFrame(animate);
-		ctx.clearRect(0, 0, 100, 100);
-		drawGround();
-		drawBallAt(bouncingFunction(globalTime++));
+		if (playing) {
+			requestAnimationFrame(animate);
+			ctx.clearRect(0, 0, 100, 100);
+			drawGround();
+			drawBallAt(bouncingFunction(globalTime++));
+		}
 	}
 	ctx.strokeStyle = '#6565D0';
 	ctx.fillStyle = '#6565D0';
-	requestAnimationFrame(animate);
+
+	/* Member functions */
+
+	this.play = function() {
+		if (!playing) {
+			playing = true;
+			requestAnimationFrame(animate);
+		}
+	}
+
+	this.pause = function() {
+		playing = false;
+	}
 }
