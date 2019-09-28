@@ -22,7 +22,7 @@ function displayOne(id) {
 	xhr.onload = function() {
 		let cdiv = document.createElement("div");
 		cdiv.id = "comment-body-" + id;
-		cdiv.innerText = xhr.responseText;
+		cdiv.innerText = parseComment(xhr.responseText);
 		let area = document.getElementById("comment-area-" + id);
 		area.appendChild(cdiv);
 		let script = document.getElementById(id + "-script");
@@ -31,6 +31,10 @@ function displayOne(id) {
 		}
 	};
 	xhr.send();
+}
+
+function parseComment(text) {
+	return text;
 }
 
 function startComment(id) {
