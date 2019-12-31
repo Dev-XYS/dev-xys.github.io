@@ -5,6 +5,8 @@ window.onload = function() {
 	xhr.onload = function() {
 		let list = xhr.responseText.split("\n");
 		for (let x of list) {
+			let div = document.getElementById("main-div");
+			div.innerHTML += `<div id="${x}-anchor"></div>`;
 			setTimeout(displayOne, 0, x);
 		}
 	};
@@ -13,22 +15,25 @@ window.onload = function() {
 
 function displayOne(id) {
 	let xhr = new XMLHttpRequest();
-	xhr.open("GET", id + ".html", false);
-	xhr.send();
-	let div = document.getElementById("main-div");
-	div.innerHTML += xhr.responseText;
-	div.innerHTML += "<div class=\"comment-area\" id=\"comment-area-"+ id + "\"><div id=\"comment-panel-" + id + "\"><a href=\"javascript:startComment(" + id + ")\">评论</a>&emsp;</div></div>";
-	xhr.open("GET", "https://wcsys.000webhostapp.com/get.php?id=" + id);
+	xhr.open("GET", id + ".html");
 	xhr.onload = function() {
-		let cdiv = document.createElement("div");
-		cdiv.id = "comment-body-" + id;
-		cdiv.innerText = parseComment(xhr.responseText);
-		let area = document.getElementById("comment-area-" + id);
-		area.appendChild(cdiv);
-		let script = document.getElementById(id + "-script");
-		if (script) {
-			eval(script.innerText);
-		}
+		console.log(`${id}-anchor`);
+		let div = document.getElementById(`${id}-anchor`);
+		div.innerHTML = xhr.responseText;
+		div.innerHTML += "<div class=\"comment-area\" id=\"comment-area-"+ id + "\"><div id=\"comment-panel-" + id + "\"><a href=\"javascript:startComment(" + id + ")\">评论</a>&emsp;</div></div>";
+		xhr.open("GET", "https://wcsys.000webhostapp.com/get.php?id=" + id);
+		xhr.onload = function() {
+			let cdiv = document.createElement("div");
+			cdiv.id = "comment-body-" + id;
+			cdiv.innerText = parseComment(xhr.responseText);
+			let area = document.getElementById("comment-area-" + id);
+			area.appendChild(cdiv);
+			let script = document.getElementById(id + "-script");
+			if (script) {
+				eval(script.innerText);
+			}
+		};
+		xhr.send();
 	};
 	xhr.send();
 }
