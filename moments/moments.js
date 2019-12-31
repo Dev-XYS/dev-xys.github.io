@@ -8,7 +8,7 @@ window.onload = async function() {
 			let div = document.getElementById("main-div");
 			div.innerHTML += `<div id="${x}-anchor"></div>`;
 			setTimeout(displayOne, 0, x);
-			await new Promise(r => setTimeout(r, 1000));
+			await new Promise(r => setTimeout(r, 1));
 		}
 	};
 	xhr.send();
