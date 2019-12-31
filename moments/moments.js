@@ -1,13 +1,14 @@
-window.onload = function() {
+window.onload = async function() {
 	let xhr = new XMLHttpRequest();
 	xhr.open("GET", "list.txt");
 	xhr.responseType = "text";
-	xhr.onload = function() {
+	xhr.onload = async function() {
 		let list = xhr.responseText.split("\n");
 		for (let x of list) {
 			let div = document.getElementById("main-div");
 			div.innerHTML += `<div id="${x}-anchor"></div>`;
 			setTimeout(displayOne, 0, x);
+			await new Promise(r => setTimeout(r, 0));
 		}
 	};
 	xhr.send();
