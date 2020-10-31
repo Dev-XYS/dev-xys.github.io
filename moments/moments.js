@@ -16,7 +16,7 @@ window.onload = async function() {
 
 function displayOne(id) {
 	let xhr = new XMLHttpRequest();
-	xhr.open("GET", id + ".html");
+	xhr.open("GET", "posts/" + id + ".html");
 	xhr.onload = function() {
 		console.log(`${id}-anchor`);
 		let div = document.getElementById(`${id}-anchor`);
