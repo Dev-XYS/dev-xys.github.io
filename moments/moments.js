@@ -1,3 +1,27 @@
+'use strict';
+
+$(async () => {
+	const res = await fetch('list.txt');
+	let list = await res.text();
+	list = list.split('\n');
+	const tasks = [];
+	for (let i of list) {
+		$('#main-div').append(`<div id="${i}-anchor"></div>`);
+		tasks.push(displayOne(i));
+	}
+	await Promise.all(tasks);
+});
+
+async function displayOne(id) {
+	const res = await fetch(`posts/${id}.html`);
+	$(`#${id}-anchor`).html(await res.text()).append(`<div class="comment-area" id="comment-area-${id}"><div id="comment-panel-${id}"><a href="javascript:startComment(${id})">评论</a>&emsp;</div></div>`);
+	const comment = await fetch(`https://wcsys.000webhostapp.com/get.php?id=${id}`);
+	let div = $(`<div id="comment-body-${id}"/>`);
+	div[0].innerText = parseComment(await comment.text());
+	$(`#comment-area-${id}`).append(div);
+	eval($(`#${id}-script`).text());
+}
+/*/
 window.onload = async function() {
 	let xhr = new XMLHttpRequest();
 	xhr.open("GET", "list.txt");
@@ -38,7 +62,7 @@ function displayOne(id) {
 	};
 	xhr.send();
 }
-
+*/
 function parseComment(text) {
 	return text;
 }
