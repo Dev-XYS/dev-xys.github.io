@@ -1,0 +1,40 @@
+html {
+    font-family: 'Times New Roman', 'SimSun';
+}
+
+.header-table {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.header-table td {
+    padding: 20px;
+}
+
+.header-row {
+    height: 200px;
+}
+
+.photo-cell {
+    width: 240px;
+    border: 1px solid black;
+    font-size: smaller;
+}
+
+.photo-div {
+    height: 200px;
+    width: 240px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid black;
+    font-size: smaller;
+}
+
+.footer {
+    border-top: 1px solid black;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-top: 2px;
+    font-size: smaller;
+}
