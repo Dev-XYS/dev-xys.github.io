@@ -21,6 +21,7 @@ async function displayOne(id) {
 	$(`#comment-area-${id}`).append(div);
 	eval($(`#${id}-script`).text());
 }
+
 /*/
 window.onload = async function() {
 	let xhr = new XMLHttpRequest();
@@ -63,6 +64,7 @@ function displayOne(id) {
 	xhr.send();
 }
 */
+
 function parseComment(text) {
 	return text;
 }
@@ -86,7 +88,7 @@ function startComment(id) {
 
 function submitComment(id) {
 	let xhr = new XMLHttpRequest();
-	input = document.getElementById("comment-box-" + id);
+	let input = document.getElementById("comment-box-" + id);
 	xhr.open("GET", "https://wcsys.000webhostapp.com/put.php?id=" + id + "&content=" + input.value);
 	xhr.send();
 	document.getElementById("comment-body-" + id).innerText += input.value + "\n";
