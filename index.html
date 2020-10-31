@@ -1,21 +1,10 @@
----
-layout: default
----
-
-<div class="home">
-
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-</div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>临时主页</title>
+  </head>
+  <body>
+    <p>这是临时的替代页面，内容很快会添加进来。</p>
+    <p><a href="moments/index.html">moments</a></p>
+  </body>
+</html>
