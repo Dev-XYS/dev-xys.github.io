@@ -12,25 +12,25 @@ body {
     vertical-align: middle;
 }
 
-.header-table td {
-    padding: 20px;
-}
-
 .header-table td:last-child {
     width: 100%;
 }
 
 .header-row {
-    height: 200px;
+    height: 250px;
 }
 
 .photo-cell {
-    width: 240px;
-    height: 200px;
-    min-width: 240px;
-    min-height: 200px;
-    border: 1px solid black;
+    width: 300px;
+    height: 250px;
+    min-width: 300px;
+    min-height: 250px;
     font-size: smaller;
+}
+
+.photo {
+    width: 300px;
+    height: 250px;
 }
 
 .normal {
