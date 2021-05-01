@@ -41,6 +41,14 @@ body {
     font-family: monospace;
 }
 
+.zh-cn-calendar {
+    margin-left: 1em;
+    border-left: solid lightgray 3px;
+    padding-left: 2em;
+    color: gray;
+    font-size: smaller;
+}
+
 .footer {
     border-top: 1px solid black;
     margin-top: 20px;
