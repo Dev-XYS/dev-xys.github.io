@@ -31,10 +31,11 @@
     </p>
     <p>我已经使用 Google Calendar 一个学期了，感觉非常好用，下面是我最近的十个日程（均以北京时间显示）。</p>
     <div class="zh-cn-calendar">
-      <script src="https://my-google-calendar.glitch.me/calendar.js?address=https://calendar.google.com/calendar/ical/dev.xorg%40gmail.com/public/basic.ics"></script>
+      <div class="dot-flashing" id="calendar-loading"></div>
+      <script src="https://my-google-calendar.glitch.me/calendar.js?address=https://calendar.google.com/calendar/ical/dev.xorg%40gmail.com/public/basic.ics" onload="document.getElementById('calendar-loading').remove()"></script>
     </div>
     <footer class="footer">
-      最后修改于2021年5月1日。
+      最后修改于2021年5月19日。
     </footer>
   </body>
 </html>
