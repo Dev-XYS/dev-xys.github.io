@@ -14,11 +14,7 @@ $(async () => {
 
 async function displayOne(id) {
 	const res = await fetch(`posts/${id}.html`);
-	$(`#${id}-anchor`).html(await res.text()).append(`<div class="comment-area" id="comment-area-${id}"><div id="comment-panel-${id}"><a href="javascript:startComment(${id})">评论</a>&emsp;</div></div>`);
-	const comment = await fetch(`https://wcsys.000webhostapp.com/get.php?id=${id}`);
-	let div = $(`<div id="comment-body-${id}"/>`);
-	div[0].innerText = parseComment(await comment.text());
-	$(`#comment-area-${id}`).append(div);
+	$(`#${id}-anchor`).html(await res.text())
 	eval($(`#${id}-script`).text());
 }
 
