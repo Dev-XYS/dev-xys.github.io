@@ -16,6 +16,15 @@ body {
     width: 100%;
 }
 
+.conference {
+    width: 120px;
+}
+
+.publication td {
+    vertical-align: top;
+    padding: 10px;
+}
+
 .header-row {
     height: 250px;
 }
